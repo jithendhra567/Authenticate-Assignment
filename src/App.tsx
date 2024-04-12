@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Authenticator from "./components/Authenticator";
+import { AuthProvider } from "./hooks/useAuth";
+import { ROUTES } from "./utils/utils";
+import Home from "./pages/home/Home";
+import NotFound from "./pages/NotFound";
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthProvider>
+        <div className="App">
+          <Routes>
+            <Route path={ROUTES.ROOT} element={<Login />} />
+            <Route path={ROUTES.REGISTER} element={<Register />} />
+            <Route
+              path={ROUTES.HOME}
+              element={
+                <Authenticator>
+                  <Home />
+                </Authenticator>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </AuthProvider>
+    </Router>
   );
 }
 
