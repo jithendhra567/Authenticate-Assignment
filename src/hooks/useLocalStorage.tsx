@@ -5,10 +5,8 @@ const useLocalStorage = <T extends {}>(keyName: string, defaultValue: T) => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const value = getItem(keyName);
-      if (value) {
-        if (typeof value === "string") return value;
-        return JSON.parse(value);
-      } else {
+      if (value) return value;
+      else {
         setItem(keyName, defaultValue);
         return defaultValue;
       }

@@ -7,10 +7,13 @@ type CustomInputProps = {
   type?: React.HTMLInputTypeAttribute;
   className?: string;
   style?: React.CSSProperties;
+  autoFocus?: boolean;
 };
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ value, onChange, type = "text", className, style, placeholder }, ref) => {
+  (props, ref) => {
+    const { value, onChange, placeholder, type, className, style, autoFocus } =
+      props;
     return (
       <input
         type={type}
@@ -20,6 +23,7 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
         className={className}
         style={style}
         ref={ref}
+        autoFocus={autoFocus}
       />
     );
   }

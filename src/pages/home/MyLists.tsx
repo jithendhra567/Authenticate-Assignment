@@ -4,6 +4,7 @@ import { MovieType } from "../../utils/types";
 import { getMoviesFromWatchList } from "../../utils/common";
 import useAuth from "../../hooks/useAuth";
 import MovieItem from "../../components/home/MovieItem";
+import MoviesLayout from "../../components/home/MoviesLayout";
 
 type MyListProps = {
   currentWatchList: string;
@@ -19,18 +20,12 @@ function MyList({ currentWatchList }: MyListProps): JSX.Element {
   }, [currentWatchList, user]);
 
   return (
-    <div>
-      <h2>{currentWatchList}</h2>
-      <div>
-        {movies.map((movie) => (
-          <MovieItem
-            onClick={() => {}}
-            toggleWatchlist={() => {}}
-            key={movie.imdbID}
-            {...movie}
-          />
-        ))}
-      </div>
+    <div className="myList">
+      <MoviesLayout
+        toogleWatchlist={() => {}}
+        movies={movies}
+        isLoading={false}
+      />
     </div>
   );
 }

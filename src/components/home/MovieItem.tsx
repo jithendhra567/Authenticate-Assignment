@@ -42,13 +42,34 @@ function MovieItem(props: Props): JSX.Element {
   };
 
   return (
-    <div>
-      <CustomButton onClick={toggleWatchlistHandler}>
-        {isWatchlisted ? <BsBookmarkDashFill /> : <BsBookmarkPlusFill />}
+    <div className="movieItem">
+      <CustomButton
+        className="textButton bookmark"
+        onClick={toggleWatchlistHandler}
+      >
+        {isWatchlisted ? (
+          <BsBookmarkDashFill size={40} color="orange" />
+        ) : (
+          <BsBookmarkPlusFill size={40} color="#0099FF" />
+        )}
       </CustomButton>
-      <CustomButton onClick={onClickHandler}>
-        <CustomImage src={Poster} alt="Movie Poster" />
-        <CustomText>{Title}</CustomText>
+      <CustomButton onClick={onClickHandler} className="textButton container">
+        {Poster !== "N/A" ? (
+          <CustomImage
+            src={Poster}
+            className="moviePoster"
+            alt="Movie Poster"
+          />
+        ) : (
+          <div className="noPoster">No Poster</div>
+        )}
+        <div className="movieDetails">
+          <CustomText className="movieTitle">{Title}</CustomText>
+          <div className="movieInfo">
+            <CustomText className="movieType">{Type}</CustomText>
+            <CustomText className="movieYear">{Year}</CustomText>
+          </div>
+        </div>
       </CustomButton>
     </div>
   );

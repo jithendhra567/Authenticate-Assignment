@@ -39,6 +39,28 @@ export const setItem = (key: string, value: any) => {
   }
 }
 
+// generate Id of lenght 10
+export const generateId = (len = 10): string => {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < len; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+// debounce
+export const debounce = (func: any, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
+  };
+};
+
 export const addMovieToWatchList = (user: string, movie: MovieType) => {
   const details = getItem(user) as UserDetailsType || {};
   const { movieList = [], movieMap = {} } = details;
@@ -60,8 +82,8 @@ export const removeMovieFromWatchList = (user: string, movie: MovieType) => {
   return { ...details, movieList: moddedList, movieMap };
 }
 
-export const getMoviesFromWatchList = (user: string, watchListName: string) => {
+export const getMoviesFromWatchList = (user: string, watchListId: string) => {
   const details = getItem(user) as UserDetailsType || {};
   const { movieList = [] } = details;
-  return movieList.filter((movie) => movie.watchListName === watchListName);
+  return movieList.filter((movie) => movie.watchListName === watchListId);
 }

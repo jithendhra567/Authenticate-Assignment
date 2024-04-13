@@ -3,9 +3,10 @@ import { getItem, getRequest } from "../utils/common";
 import API_ENDPOINTS from "../utils/apiEndPoints";
 import { MovieType, UserDetailsType } from "../utils/types";
 import useAuth from "./useAuth";
+import { DEFAULT_MOVIES } from "../utils/constants";
 
 const useMovieSearch = () => {
-  const [data, setData] = React.useState<MovieType[]>([]);
+  const [data, setData] = React.useState<MovieType[]>(DEFAULT_MOVIES);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 

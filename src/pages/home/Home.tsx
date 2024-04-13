@@ -7,6 +7,7 @@ import { CONTS } from "../../utils/constants";
 import MyList from "./MyLists";
 import CustomButton from "../../elements/CustomButton";
 import useAuth from "../../hooks/useAuth";
+import "./home.css";
 
 const Home = () => {
   const { logout } = useAuth();
@@ -14,16 +15,14 @@ const Home = () => {
 
   const currentWatchList = urlSearchParams.get(CONTS.WATCH_LIST);
   return (
-    <div>
+    <div className="home">
       <Sidebar />
-      <div>
-        {currentWatchList ? (
-          <MyList currentWatchList={currentWatchList} />
-        ) : (
-          <SearchMovies />
-        )}
-      </div>
-      <CustomButton onClick={logout}>Logout</CustomButton>
+      {currentWatchList ? (
+        <MyList currentWatchList={currentWatchList} />
+      ) : (
+        <SearchMovies />
+      )}
+      {/* <CustomButton onClick={logout}>Logout</CustomButton> */}
     </div>
   );
 };

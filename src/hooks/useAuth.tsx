@@ -9,26 +9,24 @@ import {
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./useLocalStorage";
 import { LOCAL_STORAGE, ROUTES } from "../utils/constants";
-import { getItem } from "../utils/common";
-import { UserDetailsType } from "../utils/types";
+import { getItem, setItem } from "../utils/common";
+import { UserDetailsType, WatchListType } from "../utils/types";
 import { showSnackbar } from "../elements/Snackbar";
 
 type AuthContextType = {
   user?: string;
   login: (data: string) => void;
   logout: () => void;
-  isMobile: boolean;
-  userWatchList: string[];
-  setUserWatchList: (list: string[]) => void;
+  userWatchList: WatchListType[];
+  updateUserWatchList: (list: WatchListType[]) => void;
   registerUser: (email: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
   login: () => {},
   logout: () => {},
-  isMobile: false,
   userWatchList: [],
-  setUserWatchList: () => {},
+  updateUserWatchList: () => {},
   registerUser: () => {},
 });
 
@@ -42,16 +40,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const details = (getItem(user) as UserDetailsType) || {};
     return details?.watchList || [];
   });
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  // const [isLoading, setIsLoading] = useState(true); -> this is required if we are getting userdetails from an API
-
-  console.log({ registeredUsers });
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (user) {
@@ -59,10 +47,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setUserWatchList(details?.watchList || []);
     }
   }, [user]);
-
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
 
   const navigate = useNavigate();
 
@@ -93,18 +77,21 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     navigate(ROUTES.ROOT);
   };
 
-  const value = useMemo(
-    () => ({
-      user,
-      login,
-      logout,
-      isMobile,
-      userWatchList,
-      setUserWatchList,
-      registerUser,
-    }),
-    [user, isMobile, userWatchList, registeredUsers]
-  );
+  const updateUserWatchList = (list: WatchListType[]) => {
+    const details = (getItem(user) as UserDetailsType) || {};
+    details.watchList = list;
+    setItem(user, details);
+    setUserWatchList(list);
+  };
+
+  const value = {
+    user,
+    login,
+    logout,
+    userWatchList,
+    updateUserWatchList,
+    registerUser,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
