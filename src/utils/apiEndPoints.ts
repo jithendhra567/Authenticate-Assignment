@@ -1,5 +1,8 @@
+const API_KEY = '8a3032c3'
+
 const API_ENDPOINTS = {
-  baseUrl: ''
+  baseUrl: 'http://www.omdbapi.com',
+  search: '/?apikey='+API_KEY+"&s=",
 }
 
 export default API_ENDPOINTS;

@@ -1,6 +1,13 @@
 export const LOCAL_STORAGE = {
-  user: "user",
+  currentUser: "currentUser",
+  users: "users",
   watchlist: "watchlist",
+  movieList: "movieList",
+}
+
+export const CONTS = {
+  WATCH_LIST: "watchList",
+  MOVIE_LIST: "movieList",
 }
 
 export const ROUTES = {
@@ -9,3 +16,4 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTER: "/register",
 }
+

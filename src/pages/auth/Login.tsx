@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Text from "../../elements/Text";
+import CustomText from "../../elements/CustomText";
 import CustomInput from "../../elements/CustomInput";
+import useAuth from "../../hooks/useAuth";
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>("");
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = () => {
-    localStorage.setItem("user", JSON.stringify({ email }));
-    navigate("/search");
+    login(email);
   };
 
   return (
     <div>
-      <Text>Login</Text>
+      <CustomText>Login</CustomText>
       <CustomInput
-        value=""
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your password"
+        placeholder="Enter your email"
       />
       <button onClick={handleLogin}>Login</button>
     </div>

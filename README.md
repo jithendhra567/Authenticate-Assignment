@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# JUST READ ME
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I am going to explain the project.
+
+# design pattern
+
+Component with hooks
+Datamanagement with provider (context)
+Statemanagement with reducer (redux toolkit) (this is)
+Custom Components (basic elements in react)
 
 ## Available Scripts
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-export type TextProps = {
+export type CustomTextProps = {
   children: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;
@@ -11,7 +11,11 @@ export type TextProps = {
 
 // React memo is not required here. it is just add another layer of checking which has no expensive computation.
 
-const Text = ({ children, style, className }: TextProps): JSX.Element => {
+const CustomText = ({
+  children,
+  style,
+  className,
+}: CustomTextProps): JSX.Element => {
   return (
     <p className={className} style={style}>
       {children}
@@ -19,4 +23,4 @@ const Text = ({ children, style, className }: TextProps): JSX.Element => {
   );
 };
 
-export default Text;
+export default CustomText;

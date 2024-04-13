@@ -1,7 +1,14 @@
 export type MovieType = {
-  title: string;
-  year: number;
-  imdbID: string;
-  type: string;
-  poster: string;
+  Title: string
+  Year: string
+  imdbID: string
+  Type: string
+  Poster: string
+  watchListName?: string
+}
+
+export type UserDetailsType = {
+  watchList: string[]
+  movieList: MovieType[]
+  movieMap: any
 }

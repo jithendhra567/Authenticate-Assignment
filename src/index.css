@@ -11,3 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.snackbar {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  background-color: #050505;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.snackbar.show {
+  top: 50px;
+}
+
+.snackbar.hide {
+  top: -150px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: fixed;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

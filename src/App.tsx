@@ -4,9 +4,10 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Authenticator from "./components/Authenticator";
 import { AuthProvider } from "./hooks/useAuth";
-import { ROUTES } from "./utils/utils";
+import { ROUTES } from "./utils/constants";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/NotFound";
+import Snackbar from "./elements/Snackbar";
 
 function App(): JSX.Element {
   return (
@@ -27,6 +28,7 @@ function App(): JSX.Element {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <Snackbar />
       </AuthProvider>
     </Router>
   );

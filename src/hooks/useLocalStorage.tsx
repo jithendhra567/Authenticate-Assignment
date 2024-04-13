@@ -1,28 +1,28 @@
 import { useState } from "react";
+import { getItem, setItem } from "../utils/common";
 
-const useLocalStorage = (keyName: string, defaultValue: any) => {
-  const [storedValue, setStoredValue] = useState(() => {
+const useLocalStorage = <T extends {}>(keyName: string, defaultValue: T) => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const value = window.localStorage.getItem(keyName);
+      const value = getItem(keyName);
       if (value) {
+        if (typeof value === "string") return value;
         return JSON.parse(value);
       } else {
-        window.localStorage.setItem(keyName, JSON.stringify(defaultValue));
+        setItem(keyName, defaultValue);
         return defaultValue;
       }
     } catch (err) {
+      console.log(err);
       return defaultValue;
     }
   });
-  const setValue = (newValue: any) => {
-    try {
-      window.localStorage.setItem(keyName, JSON.stringify(newValue));
-    } catch (err) {
-      console.log(err);
-    }
+
+  const setValue = (newValue: T) => {
+    setItem(keyName, newValue);
     setStoredValue(newValue);
   };
-  return [storedValue, setValue];
+  return [storedValue, setValue] as [T, typeof setValue];
 };
 
 export default useLocalStorage;
