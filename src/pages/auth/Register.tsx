@@ -1,26 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import CustomText from "../../elements/CustomText";
+import CustomInput from "../../elements/CustomInput";
+import useAuth from "../../hooks/useAuth";
+import "./auth.css";
+import AuthCard from "../../components/auth/AuthCard";
+import CustomButton from "../../elements/CustomButton";
+import { Link, useSearchParams } from "react-router-dom";
+import { ROUTES } from "../../utils/constants";
 
 function Register(): JSX.Element {
-  const [email, setEmail] = useState<string>("");
-  const navigate = useNavigate();
+  const { registerUser } = useAuth();
+  const [urlParams] = useSearchParams();
+  const emailParam = urlParams.get("email");
+  const [email, setEmail] = useState<string>(emailParam || "");
 
   const handleRegister = () => {
-    localStorage.setItem("user", JSON.stringify({ email }));
-    navigate("/search");
+    registerUser(email);
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
+    <AuthCard>
+      <CustomInput
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter here"
       />
-      <button onClick={handleRegister}>Register</button>
-    </div>
+      <div className="authButtons">
+        <Link to={ROUTES.ROOT}>
+          <CustomText>Login</CustomText>
+        </Link>
+        <CustomButton onClick={handleRegister}>Register</CustomButton>
+      </div>
+    </AuthCard>
   );
 }
 

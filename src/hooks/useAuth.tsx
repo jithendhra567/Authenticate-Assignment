@@ -11,6 +11,7 @@ import useLocalStorage from "./useLocalStorage";
 import { LOCAL_STORAGE, ROUTES } from "../utils/constants";
 import { getItem } from "../utils/common";
 import { UserDetailsType } from "../utils/types";
+import { showSnackbar } from "../elements/Snackbar";
 
 type AuthContextType = {
   user?: string;
@@ -19,6 +20,7 @@ type AuthContextType = {
   isMobile: boolean;
   userWatchList: string[];
   setUserWatchList: (list: string[]) => void;
+  registerUser: (email: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -27,10 +29,15 @@ const AuthContext = createContext<AuthContextType>({
   isMobile: false,
   userWatchList: [],
   setUserWatchList: () => {},
+  registerUser: () => {},
 });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useLocalStorage(LOCAL_STORAGE.currentUser, "");
+  const [registeredUsers, setRegisteredUsers] = useLocalStorage<string[]>(
+    LOCAL_STORAGE.users,
+    []
+  );
   const [userWatchList, setUserWatchList] = useState(() => {
     const details = (getItem(user) as UserDetailsType) || {};
     return details?.watchList || [];
@@ -38,6 +45,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // const [isLoading, setIsLoading] = useState(true); -> this is required if we are getting userdetails from an API
+
+  console.log({ registeredUsers });
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -58,13 +67,30 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
 
   const login = async (email: string) => {
-    setUser(email);
-    navigate(ROUTES.HOME);
+    const isAlreadyRegistered = registeredUsers.includes(email);
+    if (isAlreadyRegistered) {
+      setUser(email);
+      navigate(ROUTES.HOME);
+    } else {
+      showSnackbar("User not found, please register", "error", 5000);
+      navigate(ROUTES.REGISTER + "?email=" + email);
+    }
+  };
+
+  const registerUser = (email: string) => {
+    const isAlreadyRegistered = registeredUsers.includes(email);
+    if (!isAlreadyRegistered) {
+      setRegisteredUsers([...registeredUsers, email]);
+      setUser(email);
+      navigate(ROUTES.HOME);
+    } else {
+      showSnackbar("User already exists", "error", 5000);
+    }
   };
 
   const logout = () => {
     setUser("");
-    navigate(ROUTES.LOGIN, { replace: true });
+    navigate(ROUTES.ROOT);
   };
 
   const value = useMemo(
@@ -75,8 +101,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       isMobile,
       userWatchList,
       setUserWatchList,
+      registerUser,
     }),
-    [user, isMobile, userWatchList]
+    [user, isMobile, userWatchList, registeredUsers]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

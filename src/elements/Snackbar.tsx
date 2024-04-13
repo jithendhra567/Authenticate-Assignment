@@ -1,12 +1,16 @@
 import React, { useImperativeHandle } from "react";
 import CustomText from "./CustomText";
 import CustomButton from "./CustomButton";
+import { IoMdClose } from "react-icons/io";
 
 const ref = React.createRef<any>();
 
 const Snackbar = () => {
   const [showSnackbar, setShowSnackbar] = React.useState(false);
-  const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const [snackbarConfig, setSnackbarConfig] = React.useState({
+    message: "",
+    type: "info",
+  });
 
   const showSnackbarHandler = (
     message = "",
@@ -14,11 +18,18 @@ const Snackbar = () => {
     duration = 3000
   ) => {
     setShowSnackbar(true);
-    setSnackbarMessage(message);
+    setSnackbarConfig({
+      message,
+      type,
+    });
 
     setTimeout(() => {
-      setShowSnackbar(false);
+      closeSnackbar();
     }, duration);
+  };
+
+  const closeSnackbar = () => {
+    setShowSnackbar(false);
   };
 
   useImperativeHandle(
@@ -29,22 +40,24 @@ const Snackbar = () => {
     []
   );
 
+  const { type, message } = snackbarConfig;
+  const className = `snackbar ${showSnackbar ? "show" : "hide"} ${type}`;
+
   return (
-    <div className={`snackbar ${showSnackbar ? "show" : "hide"}`} ref={ref}>
-      <CustomText>{snackbarMessage}</CustomText>
-      <CustomButton
-        onClick={() => {
-          setShowSnackbar(true);
-          setSnackbarMessage("Snackbar message");
-        }}
-      >
-        Close
+    <div className={className} ref={ref}>
+      <CustomText className="snackbarMessage">{message}</CustomText>
+      <CustomButton className="textButton" onClick={closeSnackbar}>
+        <IoMdClose size={22} color={type !== "error" ? "red" : "white"} />
       </CustomButton>
     </div>
   );
 };
 
-export const showSnackbar = (message = "", type = "info", duration = 3000) => {
+export const showSnackbar = (
+  message = "",
+  type?: "info" | "error" | "success",
+  duration = 3000
+) => {
   if (ref.current) ref.current.showSnackbarHandler(message, type, duration);
 };
 
