@@ -4,14 +4,14 @@
 
 ### desktop
 
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.14.08%E2%80%AFPM.png?alt=media&token=395c1448-c8ef-4827-9a67-7a32dbec2c64" style="widht: 200px"  />
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.14.29%E2%80%AFPM.png?alt=media&token=87208bd6-3e2a-49cd-add3-7821264bb960" />
+<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.14.08%E2%80%AFPM-min.png?alt=media&token=16a04d3c-bfae-433e-be56-04d2b299d1aa" style="widht: 200px"  />
+<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.14.29%E2%80%AFPM-min.png?alt=media&token=021db410-95f5-451e-9498-3cdb89a28565" />
 
 ### mobile
 
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.16.02%E2%80%AFPM.png?alt=media&token=d5eb57d4-b585-4078-9214-bb8a1f27dde1" style="height: 400px" />
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.15.43%E2%80%AFPM.png?alt=media&token=201c4a76-6015-4451-9ddf-f8293f2cc0a8"  style="height: 400px" />
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.44.44%E2%80%AFPM.png?alt=media&token=a39bd1c9-3b23-4d07-9714-513be3d24d58"  style="height: 400px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.15.43%E2%80%AFPM-min.png?alt=media&token=c65e9535-f4d6-4827-95d8-28eb447257b3" style="height: 400px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.16.02%E2%80%AFPM-min.png?alt=media&token=2caa34b8-c852-4481-8402-33f2c7ddf267"  style="height: 400px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.44.44%E2%80%AFPM-min.png?alt=media&token=377db209-0a35-487e-ba45-ada09ed19fe5"  style="height: 400px" />
 
 ## Project Structure
 
