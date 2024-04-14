@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { MovieType } from "../../utils/types";
 import MovieItem from "./MovieItem";
 import CustomModal from "../../elements/CustomModal";
@@ -18,10 +18,10 @@ const MoviesLayout = (props: Props) => {
   const [showDetails, setShowDetails] = useState(false);
   const activeMovie = useRef<MovieType | undefined>(undefined);
 
-  const showDetailsHandler = (movie: MovieType) => {
+  const showDetailsHandler = useCallback((movie: MovieType) => {
     activeMovie.current = movie;
     setShowDetails(true);
-  };
+  }, []);
 
   if (isLoading) {
     return (

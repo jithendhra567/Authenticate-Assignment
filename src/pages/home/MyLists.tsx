@@ -19,7 +19,7 @@ type MyListProps = {
 };
 
 function MyList({ currentWatchList }: MyListProps): JSX.Element {
-  const { user, userWatchList, updateUserWatchList } = useAuth();
+  const { user, userWatchList, updateUserWatchList, toggleSideBar } = useAuth();
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [showInput, setShowInput] = useState(false);
 
@@ -61,27 +61,31 @@ function MyList({ currentWatchList }: MyListProps): JSX.Element {
 
   return (
     <div className="myList">
-      {showInput ? (
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <CustomInput
-            value={watchListName}
-            style={{ width: 200 }}
-            autoFocus
-            onChange={(e) => setWatchListName(e.target.value)}
-          />
-          <CustomButton onClick={rename}>Rename</CustomButton>
-        </div>
-      ) : (
-        <CustomButton
-          className="textButton"
-          style={{ display: "flex", alignItems: "center", gap: 20 }}
-          onClick={() => setShowInput(true)}
-        >
-          <h1 className="h1">{watchListName}</h1>
-          <TbEdit size={26} />
+      <div className="searchHeaderContent">
+        {showInput ? (
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            <CustomInput
+              value={watchListName}
+              style={{ width: 200 }}
+              autoFocus
+              onChange={(e) => setWatchListName(e.target.value)}
+            />
+            <CustomButton onClick={rename}>Rename</CustomButton>
+          </div>
+        ) : (
+          <CustomButton
+            className="textButton"
+            style={{ display: "flex", alignItems: "center", gap: 20 }}
+            onClick={() => setShowInput(true)}
+          >
+            <h1 className="h1">{watchListName}</h1>
+            <TbEdit size={26} />
+          </CustomButton>
+        )}
+        <CustomButton className="myListBtn" onClick={toggleSideBar}>
+          My Watch List
         </CustomButton>
-      )}
-
+      </div>
       <MoviesLayout
         toogleWatchlist={removeFromList}
         movies={movies}

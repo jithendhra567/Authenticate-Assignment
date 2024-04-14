@@ -20,6 +20,7 @@ type AuthContextType = {
   userWatchList: WatchListType[];
   updateUserWatchList: (list: WatchListType[]) => void;
   registerUser: (email: string) => void;
+  toggleSideBar: () => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextType>({
   userWatchList: [],
   updateUserWatchList: () => {},
   registerUser: () => {},
+  toggleSideBar: () => {},
 });
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
@@ -72,6 +74,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const toggleSideBar = () => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) {
+      sidebar.classList.toggle("active");
+    }
+  };
+
   const logout = () => {
     setUser("");
     navigate(ROUTES.ROOT);
@@ -91,6 +100,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     userWatchList,
     updateUserWatchList,
     registerUser,
+    toggleSideBar,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

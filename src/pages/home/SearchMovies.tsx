@@ -22,7 +22,7 @@ import CustomText from "../../elements/CustomText";
 const SearchMovies = () => {
   const { movies, isLoading, searchMovies, updateMovieWatchList } =
     useMovieSearch();
-  const { user } = useAuth();
+  const { user, toggleSideBar } = useAuth();
 
   const activeMovie = useRef<MovieType | undefined>(undefined);
   const [showSelectWatchlist, setShowSelectWatchlist] = useState(false);
@@ -55,11 +55,21 @@ const SearchMovies = () => {
     updateMovieWatchList();
   };
 
+  const onSearch = () => {
+    if (isLoading) return;
+    searchMovies(searchText.current);
+  };
+
   const renderHeader = useMemo(
     () => (
       <div className="searchHeader">
-        <CustomText className="h1">Welcome {user} </CustomText>
-        <CustomText>
+        <div className="searchHeaderContent">
+          <CustomText className="h1">Welcome {user} </CustomText>
+          <CustomButton className="myListBtn" onClick={toggleSideBar}>
+            My Watch List
+          </CustomButton>
+        </div>
+        <CustomText style={{ marginTop: 10 }}>
           Search and add Movies to WatchList, but clicking on bookmark{" "}
           <BsBookmarkPlusFill size={20} color="#0099FF" />. Create and delete
           multiple watchList and add Movies to any of them.
@@ -77,8 +87,15 @@ const SearchMovies = () => {
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Search Movies"
         />
-        <CustomButton onClick={() => searchMovies(searchText.current)}>
-          {isLoading ? 2 : "Search"}
+        <CustomButton onClick={onSearch}>
+          {isLoading ? (
+            <div
+              className="loader"
+              style={{ background: "white", width: 20, padding: 4 }}
+            />
+          ) : (
+            "Search"
+          )}
         </CustomButton>
       </div>
       <MoviesLayout

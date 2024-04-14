@@ -4,19 +4,20 @@ import { WatchListType } from "../../utils/types";
 import CustomText from "../../elements/CustomText";
 
 type Props = {
-  item: WatchListType;
+  title: string;
+  id: string;
   onClick: (watchList: string) => void;
   active: boolean;
 };
 
-const SidebarItem = ({ item, onClick, active }: Props) => {
+const SidebarItem = ({ title, id, onClick, active }: Props) => {
   return (
     <CustomButton
-      key={item.id}
+      key={id}
       className={`textButton sidebarListItem  ${active ? "active" : ""}`}
-      onClick={() => onClick(item.id)}
+      onClick={() => onClick(id)}
     >
-      <CustomText>{item.title}</CustomText>
+      <CustomText>{title}</CustomText>
     </CustomButton>
   );
 };

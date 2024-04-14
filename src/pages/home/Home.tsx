@@ -10,8 +10,8 @@ import useAuth from "../../hooks/useAuth";
 import "./home.css";
 
 const Home = () => {
-  const { logout } = useAuth();
-  const [urlSearchParams, setUrlSearchParams] = useSearchParams();
+  const [urlSearchParams] = useSearchParams();
+  const { toggleSideBar } = useAuth();
 
   const currentWatchList = urlSearchParams.get(CONTS.WATCH_LIST);
   return (
@@ -22,7 +22,7 @@ const Home = () => {
       ) : (
         <SearchMovies />
       )}
-      {/* <CustomButton onClick={logout}>Logout</CustomButton> */}
+      <div onClick={toggleSideBar} className="sidebar-overlay" />
     </div>
   );
 };
