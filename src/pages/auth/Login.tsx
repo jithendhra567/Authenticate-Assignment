@@ -5,16 +5,20 @@ import useAuth from "../../hooks/useAuth";
 import "./auth.css";
 import AuthCard from "../../components/auth/AuthCard";
 import CustomButton from "../../elements/CustomButton";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>("");
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
   const handleLogin = () => {
     login(email);
   };
+
+  if (user) {
+    return <Navigate to={ROUTES.HOME} />;
+  }
 
   return (
     <AuthCard isLogin>
