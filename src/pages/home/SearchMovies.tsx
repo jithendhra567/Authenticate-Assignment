@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import useMovieSearch from "../../hooks/useMovieSearch";
 import CustomInput from "../../elements/CustomInput";
 import MovieItem from "../../components/home/MovieItem";
@@ -19,15 +25,26 @@ import MoviesLayout from "../../components/home/MoviesLayout";
 import CustomButton from "../../elements/CustomButton";
 import CustomText from "../../elements/CustomText";
 
-const SearchMovies = () => {
-  const { movies, isLoading, searchMovies, updateMovieWatchList } =
-    useMovieSearch();
+type Props = {
+  movies: MovieType[];
+  isLoading: boolean;
+  updateMovieWatchList: () => void;
+  searchMovies: (text: string) => void;
+};
+
+const SearchMovies = (props: Props) => {
+  const { movies, isLoading, updateMovieWatchList, searchMovies } = props;
+
   const { user, toggleSideBar } = useAuth();
 
   const activeMovie = useRef<MovieType | undefined>(undefined);
   const [showSelectWatchlist, setShowSelectWatchlist] = useState(false);
 
   const searchText = useRef("");
+
+  useEffect(() => {
+    updateMovieWatchList();
+  }, []);
 
   const handleSearch = debounce((text: string) => {
     searchText.current = text;
@@ -40,6 +57,7 @@ const SearchMovies = () => {
       const updatedData = removeMovieFromWatchList(user || "", movie);
       if (user) setItem(user, updatedData);
       updateMovieWatchList();
+      showSnackbar("Movie removed from watchlist", "success");
       return;
     }
     activeMovie.current = movie;
@@ -53,6 +71,7 @@ const SearchMovies = () => {
     if (user) setItem(user, updatedData);
     setShowSelectWatchlist(false);
     updateMovieWatchList();
+    showSnackbar("Movie Added to watchlist", "success");
   };
 
   const onSearch = () => {
@@ -64,7 +83,7 @@ const SearchMovies = () => {
     () => (
       <div className="searchHeader">
         <div className="searchHeaderContent">
-          <CustomText className="h1">Welcome {user} </CustomText>
+          <CustomText className="h1">Welcome, {user}!</CustomText>
           <CustomButton className="myListBtn" onClick={toggleSideBar}>
             My Watch List
           </CustomButton>
@@ -84,6 +103,7 @@ const SearchMovies = () => {
       {renderHeader}
       <div className="searchBar">
         <CustomInput
+          autoFocus
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Search Movies"
         />

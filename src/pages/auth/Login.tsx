@@ -23,7 +23,7 @@ function Login(): JSX.Element {
         placeholder="Enter here"
       />
       <div className="authButtons">
-        <Link to={ROUTES.REGISTER}>
+        <Link to={ROUTES.REGISTER} id="register">
           <CustomText>Register</CustomText>
         </Link>
         <CustomButton onClick={handleLogin}>Login</CustomButton>

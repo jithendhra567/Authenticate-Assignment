@@ -34,10 +34,12 @@ const Sidebar = () => {
 
   const onClick = useCallback((watchList: string) => {
     setUrlSearchParams({ watchList });
+    toggleSideBar();
   }, []);
 
   const navigateToHome = useCallback(() => {
     navigate(ROUTES.HOME);
+    toggleSideBar();
   }, []);
 
   const onLogout = () => {
@@ -57,7 +59,7 @@ const Sidebar = () => {
         >
           <IoMdClose />
         </CustomButton>
-        <CustomButton className="textButton logoutBtn" onClick={logout}>
+        <CustomButton className="textButton logoutBtn" onClick={onLogout}>
           <CustomText className="logout">logout</CustomText>
           <TbLogout2 color="red" size={20} />
         </CustomButton>
@@ -99,4 +101,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

@@ -293,7 +293,7 @@
   position: sticky;
   background-color: white;
   padding: 20px 0px;
-  z-index: 9999;
+  z-index: 99;
   gap: 10px;
 }
 
@@ -373,8 +373,11 @@
   .movies{
     grid-template-columns: 1fr;
   }
-  .sidebarList{
-    height: 50vh;
+  .watchListSelection{
+    width: 100%;
+  }
+  .modal{
+    width: 90%;
   }
 }
 
@@ -382,5 +385,8 @@
   .sidebar{
     width: 100%;
     left: -100%;
+  }
+  .sidebarList{
+    height: 50vh;
   }
 }

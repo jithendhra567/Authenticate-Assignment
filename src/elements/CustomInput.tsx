@@ -9,6 +9,7 @@ type CustomInputProps = {
   className?: string;
   style?: React.CSSProperties;
   autoFocus?: boolean;
+  id?: string;
 };
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
@@ -22,9 +23,11 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
       style,
       autoFocus,
       onEnter,
+      id,
     } = props;
     return (
       <input
+        id={id}
         type={type}
         value={value}
         onKeyDown={(e) => (e.key === "Enter" && onEnter ? onEnter : "")}

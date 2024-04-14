@@ -76,7 +76,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const toggleSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
-    if (sidebar) {
+    const canToggle = window.innerWidth <= 1150;
+    if (sidebar && canToggle) {
       sidebar.classList.toggle("active");
     }
   };

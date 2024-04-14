@@ -35,15 +35,18 @@ const useMovieSearch = () => {
 
   const updateMovieWatchList = (list?: MovieType[]) => {
     const { movieMap = {} } = (getItem(user) as UserDetailsType) || {};
-    const modedList = (list || data).map((movie) => {
-      if (movieMap[movie.imdbID])
-        return {
-          ...movie,
-          watchListName: movieMap[movie.imdbID],
-        };
-      return movie;
+    setData((prevState) => {
+      const modedList = (list || prevState).map((movie) => {
+        if (movieMap[movie.imdbID])
+          return {
+            ...movie,
+            watchListName: movieMap[movie.imdbID],
+          };
+        delete movie.watchListName;
+        return movie;
+      });
+      return modedList;
     });
-    setData(modedList);
   };
 
   return { movies: data, isLoading, error, searchMovies, updateMovieWatchList };

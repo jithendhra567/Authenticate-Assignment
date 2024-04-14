@@ -26,10 +26,10 @@ function Register(): JSX.Element {
         placeholder="Enter here"
       />
       <div className="authButtons">
-        <Link to={ROUTES.ROOT}>
+        <Link to={ROUTES.ROOT} id="login">
           <CustomText>Login</CustomText>
         </Link>
-        <CustomButton onClick={handleRegister}>Register</CustomButton>
+        <CustomButton onClick={handleRegister}>Register Now</CustomButton>
       </div>
     </AuthCard>
   );

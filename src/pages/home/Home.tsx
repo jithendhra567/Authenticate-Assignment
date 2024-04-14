@@ -8,10 +8,14 @@ import MyList from "./MyLists";
 import CustomButton from "../../elements/CustomButton";
 import useAuth from "../../hooks/useAuth";
 import "./home.css";
+import useMovieSearch from "../../hooks/useMovieSearch";
 
 const Home = () => {
   const [urlSearchParams] = useSearchParams();
   const { toggleSideBar } = useAuth();
+
+  const { movies, isLoading, searchMovies, updateMovieWatchList } =
+    useMovieSearch();
 
   const currentWatchList = urlSearchParams.get(CONTS.WATCH_LIST);
   return (
@@ -20,7 +24,12 @@ const Home = () => {
       {currentWatchList ? (
         <MyList currentWatchList={currentWatchList} />
       ) : (
-        <SearchMovies />
+        <SearchMovies
+          movies={movies}
+          isLoading={isLoading}
+          searchMovies={searchMovies}
+          updateMovieWatchList={updateMovieWatchList}
+        />
       )}
       <div onClick={toggleSideBar} className="sidebar-overlay" />
     </div>

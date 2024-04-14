@@ -76,7 +76,7 @@ const WatchListSelection = ({ selectionHandler }: Props) => {
   return (
     <div className="watchListSelection">
       <CustomText className="h2" style={{ marginBottom: 10 }}>
-        WatchList
+        {filteredWatchList.length > 0 ? "Select WatchList" : "Create WatchList"}
       </CustomText>
       <CustomInput
         value={searchText}

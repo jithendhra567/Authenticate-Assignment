@@ -16,6 +16,7 @@ code {
   --primary: #405cf5;
   --link-color: #660eff;
   --red: #ff5100;
+  --green: #00b517;
 }
 
 * {
@@ -45,6 +46,11 @@ p{
 
 .snackbar.error {
   background-color: var(--red);
+  color: #ffffff;
+}
+
+.snackbar.success {
+  background-color: var(--green);
   color: #ffffff;
 }
 
@@ -80,8 +86,7 @@ p{
   right: 0;
   bottom: 0;
   display: flex;
-  width: '100%';
-  height: '100%';
+  z-index: 99999;
   align-items: center;
   justify-content: center;
 }
