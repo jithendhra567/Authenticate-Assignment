@@ -9,12 +9,14 @@
   background-color: #f5f5f5;
   padding: 20px;
   border-right: 1px solid #ccc;
+  position: relative;
 }
 
 .search{
   width: 82%;
   padding: 20px;
-  
+  height: 80vw;
+  overflow: auto;
 }
 
 .movies{
@@ -115,6 +117,17 @@
   color: #ccc;
 }
 
+.no-movies{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 40px;
+  color: #ccc;
+}
+
 /* movie popup */
 
 .details{
@@ -174,6 +187,13 @@
   flex-direction: column;
   gap: 20px;
   border-radius: 10px;
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.watchListContainer::-webkit-scrollbar { 
+  display: none;
 }
 
 .watchList{
@@ -194,6 +214,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 60vh;
+  overflow: auto;
+}
+
+.sidebarList::-webkit-scrollbar { 
+  display: none;
 }
 
 .sidebarListItem{
@@ -220,6 +246,7 @@
 .myList{
   width: 100%;
   height: 100%;
+  padding: 20px;
 }
 
 .searchBar{
@@ -227,4 +254,38 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.searchHeader{
+  padding: 20px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.movieItem-loader{
+  width: 100%;
+  height: 300px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logoutBtn{
+  padding: 16px 16px;
+  border-radius: 6px;
+  background-color: #eaeaea;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: space-between;
+  width: 80%;
+  position: absolute;
+  color: red;
+  bottom: 20px;
 }

@@ -1,10 +1,11 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import useMovieSearch from "../../hooks/useMovieSearch";
 import CustomInput from "../../elements/CustomInput";
 import MovieItem from "../../components/home/MovieItem";
 import { MovieType, UserDetailsType } from "../../utils/types";
 import { showSnackbar } from "../../elements/Snackbar";
 import useAuth from "../../hooks/useAuth";
+import { BsBookmarkPlusFill, BsBookmarkDashFill } from "react-icons/bs";
 import {
   getItem,
   addMovieToWatchList,
@@ -16,6 +17,7 @@ import CustomModal from "../../elements/CustomModal";
 import WatchListSelection from "../../components/home/WatchListSelection";
 import MoviesLayout from "../../components/home/MoviesLayout";
 import CustomButton from "../../elements/CustomButton";
+import CustomText from "../../elements/CustomText";
 
 const SearchMovies = () => {
   const { movies, isLoading, searchMovies, updateMovieWatchList } =
@@ -53,22 +55,30 @@ const SearchMovies = () => {
     updateMovieWatchList();
   };
 
+  const renderHeader = useMemo(
+    () => (
+      <div className="searchHeader">
+        <CustomText className="h1">Welcome {user} </CustomText>
+        <CustomText>
+          Search and add Movies to WatchList, but clicking on bookmark{" "}
+          <BsBookmarkPlusFill size={20} color="#0099FF" />. Create and delete
+          multiple watchList and add Movies to any of them.
+        </CustomText>
+      </div>
+    ),
+    [user]
+  );
+
   return (
     <div className="search">
+      {renderHeader}
       <div className="searchBar">
         <CustomInput
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Search Movies"
         />
         <CustomButton onClick={() => searchMovies(searchText.current)}>
-          {isLoading ? (
-            <div
-              className="loader"
-              style={{ background: "white", width: 20, padding: 4 }}
-            />
-          ) : (
-            "Search"
-          )}
+          {isLoading ? 2 : "Search"}
         </CustomButton>
       </div>
       <MoviesLayout

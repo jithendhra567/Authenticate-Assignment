@@ -3,6 +3,7 @@ import React from "react";
 type CustomInputProps = {
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onEnter?: () => void;
   placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
   className?: string;
@@ -12,12 +13,21 @@ type CustomInputProps = {
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
   (props, ref) => {
-    const { value, onChange, placeholder, type, className, style, autoFocus } =
-      props;
+    const {
+      value,
+      onChange,
+      placeholder,
+      type,
+      className,
+      style,
+      autoFocus,
+      onEnter,
+    } = props;
     return (
       <input
         type={type}
         value={value}
+        onKeyDown={(e) => (e.key === "Enter" && onEnter ? onEnter : "")}
         onChange={onChange}
         placeholder={placeholder}
         className={className}

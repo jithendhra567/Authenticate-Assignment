@@ -6,9 +6,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
 import SidebarItem from "./SidebarItem";
 import CustomInput from "../../elements/CustomInput";
+import { TbLogout2 } from "react-icons/tb";
 
 const Sidebar = () => {
-  const { userWatchList } = useAuth();
+  const { userWatchList, logout } = useAuth();
   const navigate = useNavigate();
 
   const [searchParams, setUrlSearchParams] = useSearchParams();
@@ -23,7 +24,9 @@ const Sidebar = () => {
 
   const updateWatchList = () => {
     if (searchText) {
-      const list = userWatchList.filter((item) => item.title === searchText);
+      const list = userWatchList.filter((item) =>
+        item.title.includes(searchText)
+      );
       setWatchList(list);
     } else setWatchList(userWatchList);
   };
@@ -46,7 +49,7 @@ const Sidebar = () => {
         active={!currentWatchList}
       />
       <CustomText className="h3" style={{ marginTop: 20 }}>
-        My List
+        My List ({watchList.length})
       </CustomText>
       <div className="divider" />
       <CustomInput
@@ -65,6 +68,10 @@ const Sidebar = () => {
           />
         ))}
       </div>
+      <CustomButton className="textButton logoutBtn" onClick={logout}>
+        <CustomText className="logout">logout</CustomText>
+        <TbLogout2 color="red" size={20} />
+      </CustomButton>
     </div>
   );
 };

@@ -28,6 +28,7 @@ function App(): JSX.Element {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <div id="portal" />
         <Snackbar />
       </AuthProvider>
     </Router>

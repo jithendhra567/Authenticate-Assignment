@@ -3,15 +3,17 @@ import { MovieType } from "../../utils/types";
 import MovieItem from "./MovieItem";
 import CustomModal from "../../elements/CustomModal";
 import MovieDetails from "./MovieDetails";
+import Skeleton from "../Skeleton";
 
 type Props = {
   movies: MovieType[];
   isLoading: boolean;
   toogleWatchlist: (movie: MovieType) => void;
+  isMyList?: boolean;
 };
 
 const MoviesLayout = (props: Props) => {
-  const { isLoading, movies, toogleWatchlist } = props;
+  const { isLoading, movies, toogleWatchlist, isMyList } = props;
 
   const [showDetails, setShowDetails] = useState(false);
   const activeMovie = useRef<MovieType | undefined>(undefined);
@@ -24,7 +26,24 @@ const MoviesLayout = (props: Props) => {
   if (isLoading) {
     return (
       <div className="movies">
-        <div>Loading...</div>
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+        <Skeleton className="movieItem-loader" />
+      </div>
+    );
+  }
+
+  if (movies.length === 0) {
+    return (
+      <div className="content">
+        <p className="no-movies">
+          {isMyList ? "No movies found" : "Search for your favorite movies"}
+        </p>
       </div>
     );
   }
@@ -36,6 +55,7 @@ const MoviesLayout = (props: Props) => {
           onClick={showDetailsHandler}
           toggleWatchlist={toogleWatchlist}
           {...movie}
+          key={movie.imdbID}
         />
       ))}
       <CustomModal visible={showDetails} onClose={setShowDetails}>

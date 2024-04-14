@@ -25,7 +25,13 @@ const MovieDetails = ({ movie, closeModal }: Props) => {
 
   return (
     <div className="details">
-      <CustomImage className="image" src={movie?.Poster} alt={movie?.Title} />
+      {movie?.Poster === "N/A" ? (
+        <div className="noPoster" style={{ width: "20vw", height: 400 }}>
+          No Poster
+        </div>
+      ) : (
+        <CustomImage className="image" src={movie?.Poster} alt={movie?.Title} />
+      )}
       {isLoading && (
         <div className="loaderContainer" style={{ width: "20vw", height: 300 }}>
           <div className="loader" style={{ width: 80, padding: 10 }} />

@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 export type CustomModalProps = {
   visible: boolean;
@@ -16,11 +17,16 @@ const CustomModal = (props: CustomModalProps) => {
   }
 
   return (
-    <div className="modal-wrapper" style={containerStyle}>
-      <div className="modal-overlay" onClick={() => onClose(false)} />
-      <div className="modal" style={modalStyle}>
-        {children}
-      </div>
+    <div>
+      {ReactDOM.createPortal(
+        <div className="modal-wrapper" style={containerStyle}>
+          <div className="modal-overlay" onClick={() => onClose(false)} />
+          <div className="modal" style={modalStyle}>
+            {children}
+          </div>
+        </div>,
+        document.getElementById("portal") as any
+      )}
     </div>
   );
 };

@@ -3,10 +3,10 @@ import { getItem, getRequest } from "../utils/common";
 import API_ENDPOINTS from "../utils/apiEndPoints";
 import { MovieType, UserDetailsType } from "../utils/types";
 import useAuth from "./useAuth";
-import { DEFAULT_MOVIES } from "../utils/constants";
+import { showSnackbar } from "../elements/Snackbar";
 
 const useMovieSearch = () => {
-  const [data, setData] = React.useState<MovieType[]>(DEFAULT_MOVIES);
+  const [data, setData] = React.useState<MovieType[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -24,9 +24,9 @@ const useMovieSearch = () => {
         const list = Search as MovieType[];
         updateMovieWatchList(list);
       }
-    } catch (error) {
-      console.log(error);
-      if (error instanceof Error) {
+    } catch (error: any) {
+      if (error.message && typeof error.message === "string") {
+        showSnackbar(error.message, "error");
         setError(error.message);
       }
     }
