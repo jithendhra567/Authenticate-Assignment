@@ -9,9 +9,19 @@
 
 ### mobile
 
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.15.43%E2%80%AFPM-min.png?alt=media&token=c65e9535-f4d6-4827-95d8-28eb447257b3" style="height: 400px" />
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.16.02%E2%80%AFPM-min.png?alt=media&token=2caa34b8-c852-4481-8402-33f2c7ddf267"  style="height: 400px" />
-<img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.44.44%E2%80%AFPM-min.png?alt=media&token=377db209-0a35-487e-ba45-ada09ed19fe5"  style="height: 400px" />
+<table>
+  <tr>
+   <td>
+   <img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.15.43%E2%80%AFPM-min.png?alt=media&token=c65e9535-f4d6-4827-95d8-28eb447257b3" style="height: 400px" />
+   </td>
+   <td>
+   <img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.16.02%E2%80%AFPM-min.png?alt=media&token=2caa34b8-c852-4481-8402-33f2c7ddf267"  style="height: 400px" />
+   </td>
+   <td>
+   <img src="https://firebasestorage.googleapis.com/v0/b/assignment-a2356.appspot.com/o/authenicate%2FScreenshot%202024-04-14%20at%209.44.44%E2%80%AFPM-min.png?alt=media&token=377db209-0a35-487e-ba45-ada09ed19fe5"  style="height: 400px" />
+   </td>
+  </tr>
+ </table>
 
 ## Project Structure
 
